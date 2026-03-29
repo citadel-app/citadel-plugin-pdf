@@ -1,0 +1,75 @@
+{
+  "name": "@citadel-app/pdf",
+  "version": "1.1.5",
+  "description": "PDF viewer with highlighting and TTS support for Citadel.",
+  "author": "Citadel Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/citadel-app/citadel-plugin-pdf.git"
+  },
+  "engines": {
+    "citadel": ">=1.1.5"
+  },
+  "citadel": {
+    "title": "PDF Viewer",
+    "icon": "assets/icon.svg",
+    "main": "dist/main.js",
+    "renderer": "dist/renderer.js",
+    "authorUrl": "https://github.com/citadel-app",
+    "verified": true,
+    "permissions": [
+      "@citadel-app/base:fs.readFile",
+      "@citadel-app/base:fs.exists",
+      "@citadel-app/base:fs.writeFile",
+      "@citadel-app/base:fs.createDirectory"
+    ],
+    "providesIpcs": [
+      "tts.start",
+      "tts.stop",
+      "tts.status",
+      "models.check",
+      "models.download"
+    ],
+    "sidecars": [
+      {
+        "id": "tts-sidecar",
+        "type": "docker"
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "generate:marketplace": "node scripts/generate-marketplace-manifest.js"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^4.10.38",
+    "react-pdf-highlighter-extended": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@citadel-app/core": "*",
+    "@citadel-app/sdk": "*",
+    "@citadel-app/ui": "*",
+    "lucide-react": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-router-dom": "*"
+  },
+  "devDependencies": {
+    "@citadel-app/core": "^1.1.5",
+    "@citadel-app/sdk": "^1.1.5",
+    "@citadel-app/ui": "^1.1.5",
+    "@electron-toolkit/utils": "^4.0.0",
+    "@types/node": "^25.5.0",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "lucide-react": "^0.453.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.0.0"
+  }
+}
