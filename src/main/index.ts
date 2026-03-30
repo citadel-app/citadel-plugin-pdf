@@ -52,6 +52,8 @@ export async function activateMain(registrar: MainRegistrar<'@citadel-app/pdf'>,
     });
 
     registrar.handle('tts.status', async () => {
-        return { daemon: ttsSidecar.status };
+        return { daemon: (ttsSidecar as any).status };
     });
 }
+
+

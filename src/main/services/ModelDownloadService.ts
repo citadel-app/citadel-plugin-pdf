@@ -25,16 +25,17 @@ export class ModelDownloadService {
     }
 
     private registerHandlers() {
-        this.registrar.handle('models.checkStatus', async () => {
-            return this.checkModelStatus();
+        this.registrar.handle('models.check', async () => {
+            return this.checkModels();
         });
+
 
         this.registrar.handle('models.download', async () => {
             if (this.isDownloading) return { success: false, error: 'Download already in progress' };
             
             try {
                 for (const url of this.REQUIRED_FILES) {
-                    const result = await this.downloadModel(url);
+                    const result = await this.downloadModels(url);
                     if (!result.success) return result;
                 }
                 return { success: true };
@@ -42,9 +43,10 @@ export class ModelDownloadService {
                 return { success: false, error: error.message };
             }
         });
+
     }
 
-    public checkModelStatus() {
+    public checkModels() {
         const modelPath = path.join(this.modelsDir, 'kokoro-v0_19.onnx');
         const voicesJsonPath = path.join(this.modelsDir, 'voices.json');
 
@@ -55,7 +57,8 @@ export class ModelDownloadService {
         };
     }
 
-    public async downloadModel(url: string): Promise<{ success: boolean; error?: string }> {
+    public async downloadModels(url: string = this.REQUIRED_FILES[0]): Promise<{ success: boolean; error?: string }> {
+
         this.isDownloading = true;
         const filename = path.basename(url);
         const targetPath = path.join(this.modelsDir, filename);
