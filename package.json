@@ -1,6 +1,6 @@
 {
   "name": "@citadel-app/pdf",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "PDF viewer with highlighting and TTS support for Citadel.",
   "author": "Citadel Team",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "url": "git+https://github.com/citadel-app/citadel-plugin-pdf.git"
   },
   "engines": {
-    "citadel": ">=1.2.1"
+    "citadel": ">=1.2.3"
   },
   "citadel": {
     "title": "PDF Viewer",
@@ -40,14 +40,15 @@
   },
   "scripts": {
     "dev": "vite build --watch",
-    "build": "vite build",
-    "generate:marketplace": "node scripts/generate-marketplace-manifest.js"
+    "build": "npm run build:main && npm run build:renderer",
+    "generate:marketplace": "node scripts/generate-marketplace-manifest.js",
+    "build:main": "vite build --mode main",
+    "build:renderer": "vite build --mode renderer"
   },
   "dependencies": {
     "pdfjs-dist": "^4.10.38",
     "react-pdf-highlighter-extended": "^8.1.0"
   },
-
   "peerDependencies": {
     "@citadel-app/core": "*",
     "@citadel-app/sdk": "*",
@@ -58,9 +59,9 @@
     "react-router-dom": "*"
   },
   "devDependencies": {
-    "@citadel-app/core": "^1.2.1",
-    "@citadel-app/sdk": "^1.2.1",
-    "@citadel-app/ui": "^1.2.1",
+    "@citadel-app/core": "^1.2.3",
+    "@citadel-app/sdk": "^1.2.3",
+    "@citadel-app/ui": "^1.2.3",
     "@electron-toolkit/utils": "^4.0.0",
     "@types/node": "^25.5.0",
     "@types/react": "^18.3.11",
